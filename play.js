@@ -31,6 +31,17 @@ const person={
     }
 }
 
+const copiedPerson={...person};
+console.log(copiedPerson);
+
+const printName=({name})=>{
+    console.log(name);
+}
+
+const {name,age}=person;
+console.log(name,age);
+// printName(person);
+
 // console.log(person);
 // person.greet();
 
@@ -42,15 +53,20 @@ const person={
 // console.log(student);
 
 hobbies=['Sports','cooking'];
-for(let hobby of hobbies){
-    console.log(hobby);
-}
+const [hobby1,hobby2]=hobbies;
+console.log(hobby1,hobby2);
 
-hobbies.push("programming");
+// const copiedArray=[...hobbies];
+// console.log(copiedArray);
+// for(let hobby of hobbies){
+//     console.log(hobby);
+// }
 
-console.log(hobbies.map((hobby)=>{
-    return "Hobby: "+hobby;
-}));
+// hobbies.push("programming");
+
+// console.log(hobbies.map((hobby)=>{
+//     return "Hobby: "+hobby;
+// }));
 // console.log(hobbies);
 
 // const arr= ['apple', 'oranges' , ' ', 'mango', ' ' , 'lemon'];
@@ -63,3 +79,8 @@ console.log(hobbies.map((hobby)=>{
 // })
 
 // console.log(newarray);
+
+// const toArray=(...args)=>{
+//     return args;
+// }
+// console.log(toArray(5,-9,0));
