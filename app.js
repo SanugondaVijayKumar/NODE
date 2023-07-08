@@ -1,54 +1,22 @@
-// const http=require('http');
-// const server=http.createServer((req,res)=>{
-//     res.writeHead(200,{'Content-Type':'text/plain'});
-//     const name="Vijay Kumar";
-//     console.log(name);
-//     res.end(name);
-
-// });
-
-// server.listen(4000,()=>{
-//     console.log("server is running on 4000");
-// })
-
-
-// const server=http.createServer((req,res)=>{
-//     const url=new URL(req.url,`http://${req.headers.host}`);
-    
-
-//     if(url.pathname=='/home'){
-//         res.writeHead(200,{'Content-Type':'text/plain'});
-//         res.end('Welcome home');
-//     }else if(url.pathname=='/about'){
-//         res.writeHead(200,{'Content-Type':'text/plain'});
-//         res.end('Welcome to About Us Page');
-//     }else if(url.pathname=='/node'){
-//         res.writeHead(200,{'Content-Type':'text/plain'});
-//         res.end('Welcome to my Node.js Project');
-//     }else{
-//         res.writeHead(404,{'Content-Type':'text/plain'});
-//         res.end('404 Not Found');
-//     }
-// })
-
-
-
-
 const express=require('express');
 const bodyParser=require('body-parser');
+const path=require('path');
 
 const app=express();
 
 const adminRoutes=require('./routes/admin');//my own file imported
 const shopRoutes=require('./routes/shop');//my own file imported
+const contactRoutes=require('./routes/contactus');
 
 app.use(bodyParser.urlencoded());
+app.use(express.static(path.join(__dirname,'public')));
 
 app.use('/admin',adminRoutes);
-app.use('/shop',shopRoutes);
+app.use(shopRoutes);
+app.use('/admin',contactRoutes);
 
 app.use((req,res,next)=>{
-    res.status(404).send('<h1>Page Not Found</h1>');
+    res.status(404).sendFile(path.join(__dirname,'views','404.html'));
 });
 
 app.listen(3000);
